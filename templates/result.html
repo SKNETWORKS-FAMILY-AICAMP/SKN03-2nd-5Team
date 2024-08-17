@@ -3,25 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detai Page</title>
+    <title>Detail Page</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/result.css' %}">
-<!-- jsDelivr  -->
-<script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
-<!-- UNPKG -->
-<script src="https://unpkg.com/fireworks-js@2.x/dist/index.umd.js"></script>
-
+    <!-- jsDelivr -->
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.x/dist/index.umd.js"></script>
+    <!-- UNPKG -->
+    <script src="https://unpkg.com/fireworks-js@2.x/dist/index.umd.js"></script>
 </head>
-<body  class="fireworks" >
-    <header>
-        <div class="header-container">
-        <a href="/" class="home-link">
-            <i class="fa-solid fa-house"></i>
-            <div>Home</div>
-        </a>
-        </div>
-    </header>
-    <section>
+<body>
+    <div class="fireworks"></div>
+    <div class="content">
+        <header>
+            <div class="header-container">
+                <a href="/" class="home-link">
+                    <i class="fa-solid fa-house"></i>
+                    <div>Home</div>
+                </a>
+            </div>
+        </header>
+        <section>
             <div class="detail-container">
                 <div class="detail-image">
                     <img src="/static/img/firework.png" alt="{{ Festival.name }}">
@@ -33,15 +34,14 @@
                     <p><i class="icon fas fa-link"></i> <strong>홈페이지:</strong> <a href="{{ Festival.link }}" target="_blank">{{ festival.website }}</a></p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+    
     <script>
         const container = document.querySelector('.fireworks')
         const fireworks = new Fireworks.default(container)
-        console.log(container);
         fireworks.start()
     </script>
     <script src="https://kit.fontawesome.com/c4ee9e0091.js" crossorigin="anonymous"></script>
-
 </body>
 </html>

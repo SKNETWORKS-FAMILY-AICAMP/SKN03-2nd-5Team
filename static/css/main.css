@@ -94,11 +94,9 @@ body, h1 {
 }
 
 
-
 .image-wrapper {
     width: 100%;
-    max-width: 1200px; /* 최대 너비 설정 */
-    margin-top: 20px; /* 검색창과 이미지 박스 사이의 간격 */
+    margin: 20px auto; /* 검색창과 이미지 박스 사이의 간격 */
 }
 
 .image-box {
