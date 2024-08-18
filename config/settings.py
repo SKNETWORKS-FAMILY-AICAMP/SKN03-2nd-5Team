@@ -82,10 +82,10 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "project_db", # 데이터베이스 이름 
-        # "USER": "django_root", # 유저 아이디
-        # "PASSWORD": "django_root1!", # 유저 비번
-        # "HOST": "localhost", # host 주소
-        # "PORT": "3306" # port 번호 
+        "USER": "django_root", # 유저 아이디
+        "PASSWORD": "django_root1!", # 유저 비번
+        "HOST": "localhost", # host 주소
+        "PORT": "3306" # port 번호 
     }
 }
 
