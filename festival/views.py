@@ -53,11 +53,11 @@ def click_address(request, title):
 
 def _search_data(region,title):
     if region and title:
-        results = Festival.objects.filter(region_name=region,festival_name=title)
+        results = Festival.objects.filter(region_name=region,festival_name__contains=title)
     elif region:
         results = Festival.objects.filter(region_name=region)
     elif title:
-        results = Festival.objects.filter(festival_name=title)
+        results = Festival.objects.filter(festival_name__contains=title)
     else:
         results = Festival.objects.all()    
     
