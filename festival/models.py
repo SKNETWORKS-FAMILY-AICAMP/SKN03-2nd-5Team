@@ -1,7 +1,6 @@
+# show_hotplace/models.py
+
 from django.db import models
-
-# Create your models here.
-
 
 class Festival(models.Model):
     festival_name = models.CharField(max_length=255, primary_key=True)
@@ -15,6 +14,5 @@ class Festival(models.Model):
     website_url = models.CharField(max_length=255)
     region_name = models.CharField(max_length=255)
 
-    
     class Meta:
             db_table = 'festival_table'

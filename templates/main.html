@@ -17,34 +17,17 @@
 
     <div class="image-wrapper">
         <div class="image-box">
-            <a href="https://example.com/page1" class="image-item">
-                <img src="https://via.placeholder.com/150" alt="Festival 1">
+            {% if future_objects %}
+            {% for up_come in future_objects %}
+            <a href="{% url 'detail_result' up_come.model.festival_name %}"  class="image-item">
+                <img src="{% static up_come.img_path %}">
                 <div class="overlay">
-                    <span class="text">Festival 1</span>
+                    <span class="text">{{up_come.model.festival_name}}</span>
                     <span class="arrow">></span>
                 </div>
             </a>
-            <a href="https://example.com/page2" class="image-item">
-                <img src="https://via.placeholder.com/150" alt="Festival 2">
-                <div class="overlay">
-                    <span class="text">Festival 2</span>
-                    <span class="arrow">></span>
-                </div>
-            </a>
-            <a href="https://example.com/page3" class="image-item">
-                <img src="https://via.placeholder.com/150" alt="Festival 3">
-                <div class="overlay">
-                    <span class="text">Festival 3</span>
-                    <span class="arrow">></span>
-                </div>
-            </a>
-            <a href="https://example.com/page4" class="image-item">
-                <img src="https://via.placeholder.com/150" alt="Festival 4">
-                <div class="overlay">
-                    <span class="text">Festival 4</span>
-                    <span class="arrow">></span>
-                </div>
-            </a>
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
 
