@@ -1,2 +1,7 @@
 .venv/
 db.sqlite3
+_pycache__/
+*.py[cod]
+*$py.class
+**/__pycache__/
+**/*.pyc
