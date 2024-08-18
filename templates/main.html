@@ -75,7 +75,7 @@
     </thead>
     <tbody>
 
-        {% for item in items %}
+        {% for item in filtered_festival %}
         <tr>
         <a href="{% url 'detail_result' item.title %}" >
             <th scope="row" name="festival_name" >{item.title}</th>

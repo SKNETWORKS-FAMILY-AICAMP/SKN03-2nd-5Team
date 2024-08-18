@@ -25,13 +25,18 @@
         <section>
             <div class="detail-container">
                 <div class="detail-image">
-                    <img src="/static/img/firework.png" alt="{{ Festival.name }}">
+                    <img src="{% static 'img/'|add:festival.festival_name|add:'.jpg' %}"
+                    alt="{{ festival.festival_name }}">
                 </div>
                 <div class="detail-info">
-                    <p><i class="icon fas fa-calendar-alt"></i> <strong>축제 날짜:</strong> {{ Festival.date }}</p>
-                    <p><i class="icon fas fa-money-bill-wave"></i> <strong>축제 요금:</strong> {{ Festival.fee }}</p>
-                    <p><i class="icon fas fa-map-marker-alt"></i> <strong>장소:</strong> {{ Festival.location }}</p>
-                    <p><i class="icon fas fa-link"></i> <strong>홈페이지:</strong> <a href="{{ Festival.link }}" target="_blank">{{ festival.website }}</a></p>
+                    <p><i class="icon fas fa-search"></i>{{ festival.festival_name  }}</p>
+                    <p><i class="icon fas fa-map-marker-alt"></i> <strong>장소:</strong> {{ festival.location  }}</p>
+                    <p><i class="icon fas fa-calendar-alt"></i> <strong>일자:</strong> {{ festival.start_date }} ~ {{ festival.end_date }}</p>
+                    <p><i class="icon fas fa-money-bill-wave"></i> <strong>요금:</strong> {{ festival.fee }}</p>
+                    <p><i class="icon fas fa-parking"></i> <strong>주차장 보유:</strong> {{ festival.parking_available|yesno:"있음,없음"  }}</p>
+                    <p><i class="icon fas fa-info-circle"></i> <strong>상세 설명:</strong> {{ festival.description  }}</p>
+                    <p><i class="icon fas fa-map"></i> <strong>도로명 주소:</strong> {{ festival.address }}</p>
+                    <p><i class="icon fas fa-link"></i> <strong>홈페이지:</strong> <a href="{{ festival.website_url }}">{{ festival.website_url }}</a></p>
                 </div>
             </div>
         </section>

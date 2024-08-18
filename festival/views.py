@@ -1,32 +1,45 @@
-from django.shortcuts import render
-# Create your views here.
+# show_hotplace/views.py
+
+from django.shortcuts import render, get_object_or_404
 from .models import Festival
 
-def main(req):
-
-    return render (req,"main.html")
-
-
-# from .models import Festival  # 모델 파일에서 필요한 모델을 가져옵니다
-
-def search_results(req):
-    if req.method == "GET":
-        title = req.GET.get("search")
-        if title:
-            results = Festival.objects.filter(title=title)
-
+def main_view(request):
+    unique_region_names = Festival.objects.values('region_name').distinct()
+    if request.method == "GET":
+        region = request.GET.get('region', [None])
+        if type(region) == str:
+            region =region.strip()
+        
+        title = request.GET.get('title', [None])
+        if type(title) == str:
+            title =title.strip()
+        
+        if region and title:
+            results = Festival.objects.filter(region_name=region,festival_name=title)
+        elif region:
+            results = Festival.objects.filter(region_name=region)
+        elif title:
+            results = Festival.objects.filter(festival_name=title)
+        else:
+            results = Festival.objects.all()
+        
+        
     context = {
-        'results': results
+        "unique_region_names" : unique_region_names,
+        'filtered_festival': results
     }
+    
 
-    return render(req, 'main.html', context)
+    return render(request, 'main.html', context)
+    
 
-def click_address(req, title):
-        if title:
-            result = Festival.objects.filter(title=title)
+def click_address(request, title):
+    print(f"title {title}")
+    if title:
+        result = get_object_or_404(Festival, festival_name=title)
+    print(result)
+    
 
-        context = {
-        'result':result
-        }
-
-        return render(req, 'result.html', context)
+    return render(request, 'result.html', {
+        'festival': result
+    })
