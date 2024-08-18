@@ -1,0 +1,5 @@
+cryptography==42.0.8
+Django==5.0.7
+mysqlclient
+gunicorn==20.1.0
+pymysql
