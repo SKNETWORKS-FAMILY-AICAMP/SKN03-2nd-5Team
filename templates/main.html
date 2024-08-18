@@ -66,8 +66,7 @@
     </thead>
     <tbody>
 
-        {% for item in filtered_festival %}
-        
+        {% for item in items %}
         <tr>
         <td><a href="{% url 'detail_result' item.festival_name %}" > {{item.festival_name}}</a></td>
         <td>{{item.location}}</td>

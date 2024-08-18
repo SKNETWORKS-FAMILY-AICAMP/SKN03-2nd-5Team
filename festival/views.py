@@ -13,6 +13,9 @@ def main_view(request):
     up_coming = _preprocess_future(future_objects)
     unique_region_names = Festival.objects.values('region_name').distinct()
     
+
+    unique_region_names = Festival.objects.values('region_name').distinct()
+    
     if request.method == "GET":
         region = request.GET.get('region', [None])
         if type(region) == str:
@@ -21,7 +24,7 @@ def main_view(request):
         title = request.GET.get('title', [None])
         if type(title) == str:
             title =title.strip()
-        
+
         results = _search_data(region,title)
         up_coming = _preprocess_future(results)
         
@@ -29,6 +32,7 @@ def main_view(request):
         
     context = {
         "future_objects" : up_coming,
+
         "unique_region_names" : unique_region_names,
         'filtered_festival': results
     }
@@ -37,8 +41,7 @@ def main_view(request):
     return render(request, 'main.html', context)
     
 
-def click_address(request, title):
-    
+def click_address(request, title):    
     if title:
         result = get_object_or_404(Festival, festival_name=title)
         image_path = _check_img(title)
@@ -68,7 +71,7 @@ def _check_img(title):
     if not os.path.exists(full_image_path):
         image_path = 'img/poster/no_img.png'
     return image_path
-
+    
 def _preprocess_future(future_objects):
     today = timezone.now().date()
     future_objects = future_objects.filter(start_date__gt=today).order_by('start_date')
