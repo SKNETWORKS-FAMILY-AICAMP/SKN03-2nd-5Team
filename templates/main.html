@@ -12,50 +12,41 @@
     <div class="site-header">
         <h1 class="site-title">대한민국 모든 축제</h1>
     </div>
+
+
+
     <div class="image-wrapper">
         <div class="image-box">
-            <a href="https://example.com/page1" class="image-item">
-                <img src="https://via.placeholder.com/150" alt="Festival 1">
+            {% if future_objects %}
+            {% for up_come in future_objects %}
+            <a href="{% url 'detail_result' up_come.model.festival_name %}"  class="image-item">
+                <img src="{% static up_come.img_path %}">
                 <div class="overlay">
-                    <span class="text">Festival 1</span>
+                    <span class="text">{{up_come.model.festival_name}}</span>
                     <span class="arrow">></span>
                 </div>
             </a>
-            <a href="https://example.com/page2" class="image-item">
-                <img src="https://via.placeholder.com/150" alt="Festival 2">
-                <div class="overlay">
-                    <span class="text">Festival 2</span>
-                    <span class="arrow">></span>
-                </div>
-            </a>
-            <a href="https://example.com/page3" class="image-item">
-                <img src="https://via.placeholder.com/150" alt="Festival 3">
-                <div class="overlay">
-                    <span class="text">Festival 3</span>
-                    <span class="arrow">></span>
-                </div>
-            </a>
-            <a href="https://example.com/page4" class="image-item">
-                <img src="https://via.placeholder.com/150" alt="Festival 4">
-                <div class="overlay">
-                    <span class="text">Festival 4</span>
-                    <span class="arrow">></span>
-                </div>
-            </a>
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
 
     <section class="container">
     <div class="search-container">
-        <select class="search-select">
-            <option value="all">전체</option>
-            <option value="option1">연극</option>
-            <option value="option2">축제</option>
-            <option value="option3">뮤지컬</option>
-        </select>
         <form method="GET" class="search-form">
+        <select name="region" id="region" class="search-select"     >
+                <option value="">선택해주세요</option>
+                
+                {% for region in unique_region_names %}
+                <option value="{{ region.region_name }}" {% if request.GET.region == region.region_name %}selected{% endif %}>
+                    {{ region.region_name }}
+                </option>
+                {% endfor %}
+
+            </select>
+        
             <input type="text" 
-            name="search"
+            name="title"
             placeholder="검색어를 입력하세요" class="search-input">
             <button type="submit" class="search-button">
                 <i class="fa-sharp fa-solid fa-magnifying-glass"></i>
@@ -63,7 +54,7 @@
         </form>
     </div>
 </section>
-{% if items %}
+{% if filtered_festival %}
 <section class="search-result-table">
 <table class=" table table-success table-striped">
     <thead>
@@ -75,14 +66,12 @@
     </thead>
     <tbody>
 
-        {% for item in items %}
+        {% for item in filtered_festival %}
+        
         <tr>
-        <a href="{% url 'detail_result' item.title %}" >
-            <th scope="row" name="festival_name" >{item.title}</th>
-        </a>
-        <td>{item.name}</td>
-        <td>{item.locate}</td>
-        <td>{item.date}</td>
+        <td><a href="{% url 'detail_result' item.festival_name %}" > {{item.festival_name}}</a></td>
+        <td>{{item.location}}</td>
+        <td>{{item.start_date}}</td>
         </tr>
         {% endfor %}
     </tbody>
