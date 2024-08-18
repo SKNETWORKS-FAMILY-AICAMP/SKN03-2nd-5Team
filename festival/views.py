@@ -13,8 +13,6 @@ def main_view(request):
     up_coming = _preprocess_future(future_objects)
     unique_region_names = Festival.objects.values('region_name').distinct()
     
-
-    unique_region_names = Festival.objects.values('region_name').distinct()
     
     if request.method == "GET":
         region = request.GET.get('region', [None])
@@ -26,8 +24,9 @@ def main_view(request):
             title =title.strip()
 
         results = _search_data(region,title)
-        up_coming = _preprocess_future(results)
-        
+        print(f'region {region}')
+        print(f'title {title}')
+        print(f"result {results}")
         
         
     context = {
@@ -54,7 +53,7 @@ def click_address(request, title):
 
 def _search_data(region,title):
     if region and title:
-            results = Festival.objects.filter(region_name=region,festival_name=title)
+        results = Festival.objects.filter(region_name=region,festival_name=title)
     elif region:
         results = Festival.objects.filter(region_name=region)
     elif title:
@@ -62,7 +61,7 @@ def _search_data(region,title):
     else:
         results = Festival.objects.all()    
     
-    return results.order_by('festival_name')
+    return results
 
 def _check_img(title):
     image_path = f'img/poster/{title}.jpg'
