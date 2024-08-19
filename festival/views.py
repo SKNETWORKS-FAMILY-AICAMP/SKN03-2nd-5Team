@@ -1,6 +1,6 @@
 # show_hotplace/views.py
 
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Festival
 import os 
 from django.conf import settings
@@ -13,7 +13,6 @@ def main_view(request):
     up_coming = _preprocess_future(future_objects)
     unique_region_names = Festival.objects.values('region_name').distinct()
     
-    
     if request.method == "GET":
         region = request.GET.get('region', [None])
         if type(region) == str:
@@ -24,18 +23,12 @@ def main_view(request):
             title =title.strip()
 
         results = _search_data(region,title)
-        print(f'region {region}')
-        print(f'title {title}')
-        print(f"result {results}")
         
-        
-    context = {
+        context = {
         "future_objects" : up_coming,
-
         "unique_region_names" : unique_region_names,
         'filtered_festival': results
-    }
-    
+        }
 
     return render(request, 'main.html', context)
     
@@ -52,8 +45,12 @@ def click_address(request, title):
     })
 
 def _search_data(region,title):
+    images = []
     if region and title:
         results = Festival.objects.filter(region_name=region,festival_name__contains=title)
+        for result in results:
+            images.append(_check_img(result.festival_name))
+            
     elif region:
         results = Festival.objects.filter(region_name=region)
     elif title:

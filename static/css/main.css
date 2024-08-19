@@ -18,6 +18,12 @@ body, h1 {
     box-sizing: border-box;
 }
 
+.logo{
+    width: 200px;
+    height: 40px;
+    object-fit: cover;
+}
+
 .site-header {
     background-color: #f4f4f4; /* 헤더 배경 색상 */
     padding: 20px ; /* 헤더 상하 패딩 */
@@ -37,6 +43,7 @@ body, h1 {
     width: 100%;
     display:flex;
     justify-content: center;
+    margin-bottom: 30px;
 }
 
 .search-container {
